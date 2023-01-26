@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { Button, Container, Typography } from '@mui/material';
+import { ProductList } from '@/components/Product/ProductList';
 
-const HomePage = () => {
+const HomePage = ({ productList }: {productList: TProduct[]}) => {
     return (
         <>
             <Head>
@@ -17,12 +18,26 @@ const HomePage = () => {
             </Head>
             <main>
                 <Container>
-                    <Button>Hola</Button>
-                    <Typography>NEXTJS-</Typography>
+                    <ProductList products={productList}/>
+                    {/* <Button>Hola</Button>
+                    <Typography>NEXTJS-</Typography> */}
                 </Container>
             </main>
         </>
     );
 };
+
+
+import { GetServerSideProps } from 'next'
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const response = await fetch('http://localhost:3000/api/avo');
+    const { data: productList }: TAPIAvoResponse = await response.json();
+    return {
+        props: {
+            productList,
+        }
+    }
+}
 
 export default HomePage;
