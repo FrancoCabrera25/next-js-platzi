@@ -6,7 +6,8 @@ import { CssBaseline } from '@mui/material';
 import type { AppProps } from 'next/app';
 import { lightTheme, darkTheme } from '../theme';
 import Layout from '@/components/Layout/Layout';
-
+import { Provider } from 'react-redux';
+import { store } from '../store';
 interface MyAppProps extends AppProps {
     emotionCache?: EmotionCache;
 }
@@ -20,11 +21,13 @@ export default function App({
 }: MyAppProps) {
     return (
         <CacheProvider value={emotionCache}>
-            <ThemeProvider theme={darkTheme }>
-                <Layout>
-                    <CssBaseline />
-                    <Component {...pageProps} />
-                </Layout>
+            <ThemeProvider theme={darkTheme}>
+                <Provider store={store}>
+                    <Layout>
+                        <CssBaseline />
+                        <Component {...pageProps} />
+                    </Layout>
+                </Provider>
             </ThemeProvider>
         </CacheProvider>
     );

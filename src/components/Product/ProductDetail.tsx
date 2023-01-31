@@ -34,7 +34,7 @@ const ProductDetail = ({ product }: Props) => {
                     <Typography variant='h4'> {product.name}</Typography>
                     <Typography variant='h6'> {product.price}</Typography>
                 </Box>
-                <AddToCart />
+                <AddToCart product= {product} />
             </Grid>
             <ProductDescription description={product.attributes.description} />
             <ProductAttributes attributes={product.attributes} />
