@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import Typography from '@mui/material/Typography';
 import Avocado from '../SVGIcons/Avocado';
 import Link from 'next/link';
 import NavBarItem from './NavBarItem';

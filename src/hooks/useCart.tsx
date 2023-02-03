@@ -1,11 +1,17 @@
-import { addToCart, decrement, increament, removeItem, setCart } from '@/store/cart/cartSlide';
+import {
+    addToCart,
+    decrement,
+    increament,
+    removeItem,
+    setCart,
+} from '@/store/cart/cartSlide';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../store/store';
 
 export const useCart = () => {
     const dispatch = useAppDispatch();
-    const { cart } = useSelector((state: RootState) => state.cart);
+    const { cart, isLoaded } = useSelector((state: RootState) => state.cart);
 
     useEffect(() => {
         const cart = localStorage.getItem('cart')
@@ -15,10 +21,13 @@ export const useCart = () => {
         if (cart) {
             dispatch(setCart(cart));
         }
-    },[]);
+    }, []);
 
     useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cart));
+        if(isLoaded){
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
     }, [cart]);
 
     const addProducToCart = (product: any) => {
@@ -37,6 +46,13 @@ export const useCart = () => {
         dispatch(decrement(id));
     };
 
+    const totalItemsCart = () => {   
+        return cart.reduce(
+            (prev, current) =>  current.quantity + prev ,
+            0
+        );
+    };
+
     return {
         cart,
 
@@ -44,5 +60,6 @@ export const useCart = () => {
         removeProductToCart,
         incrementProductToCart,
         decrecrementProductToCart,
+        totalProducts: totalItemsCart,
     };
 };

@@ -8,12 +8,12 @@ interface Props {
     product: TProduct;
 }
 export const AddToCart = ({ product }: Props) => {
-     const {addProducToCart}  =  useCart();
+     const { addProducToCart }  = useCart();
     return (
         <Grid container sx={{ marginTop: '45px', width: '100%' }} spacing={1}>
-            <Grid item xs={6}>
+            {/* <Grid item xs={6}>
                 <TextField fullWidth />
-            </Grid>
+            </Grid> */}
             <Grid item xs={6}>
                 <Button
                 onClick={() => addProducToCart(product)}

@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface ICartStore {
     cart: any[];
+    isLoaded: boolean;
 }
 
 const initialState: ICartStore = {
     cart: [],
+    isLoaded: false,
 };
 
 export const cartSlice = createSlice({
@@ -14,6 +16,7 @@ export const cartSlice = createSlice({
     reducers: {
         setCart: (state, { payload }) => {
             state.cart = payload;
+            state.isLoaded = true;
         },
         addToCart: (state, { payload }) => {
             const { id } = payload;
